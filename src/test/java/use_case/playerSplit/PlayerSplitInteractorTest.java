@@ -86,7 +86,7 @@ class PlayerSplitInteractorTest {
         game.setSplitted(true);
         DeckStub deckStub = new DeckStub();
         PresenterStub presenter = new PresenterStub();
-        PlayerSplitInteractor interactor = new PlayerSplitInteractor(game, deckStub, presenter);
+        PlayerSplitInteractor interactor = new PlayerSplitInteractor(deckStub, presenter);
 
         interactor.execute(new PlayerSplitInputData(game));
 
@@ -101,7 +101,7 @@ class PlayerSplitInteractorTest {
         BlackjackGame game = createGameWithPlayer("player1");
         DeckStub deckStub = new DeckStub();
         PresenterStub presenter = new PresenterStub();
-        PlayerSplitInteractor interactor = new PlayerSplitInteractor(game, deckStub, presenter);
+        PlayerSplitInteractor interactor = new PlayerSplitInteractor(deckStub, presenter);
 
         interactor.execute(new PlayerSplitInputData(game));
 
@@ -120,7 +120,7 @@ class PlayerSplitInteractorTest {
         game.getPlayer().addHand(hand);
         DeckStub deckStub = new DeckStub();
         PresenterStub presenter = new PresenterStub();
-        PlayerSplitInteractor interactor = new PlayerSplitInteractor(game, deckStub, presenter);
+        PlayerSplitInteractor interactor = new PlayerSplitInteractor(deckStub, presenter);
 
         interactor.execute(new PlayerSplitInputData(game));
 
@@ -139,7 +139,7 @@ class PlayerSplitInteractorTest {
         DeckStub deckStub = new DeckStub(new Card("7S", "image", "7", "SPADES"));
         deckStub.setThrowError(true);
         PresenterStub presenter = new PresenterStub();
-        PlayerSplitInteractor interactor = new PlayerSplitInteractor(game, deckStub, presenter);
+        PlayerSplitInteractor interactor = new PlayerSplitInteractor(deckStub, presenter);
 
         interactor.execute(new PlayerSplitInputData(game));
 
@@ -160,7 +160,7 @@ class PlayerSplitInteractorTest {
         Card secondDraw = new Card("9S", "image", "9", "SPADES");
         DeckStub deckStub = new DeckStub(firstDraw, secondDraw);
         PresenterStub presenter = new PresenterStub();
-        PlayerSplitInteractor interactor = new PlayerSplitInteractor(game, deckStub, presenter);
+        PlayerSplitInteractor interactor = new PlayerSplitInteractor(deckStub, presenter);
 
         interactor.execute(new PlayerSplitInputData(game));
 

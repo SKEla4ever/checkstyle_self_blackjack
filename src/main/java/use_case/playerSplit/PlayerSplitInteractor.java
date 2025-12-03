@@ -9,23 +9,21 @@ import java.io.IOException;
 
 public class PlayerSplitInteractor implements PlayerSplitInputBoundary {
 
-    private final BlackjackGame game;
     private final PlayerSplitDataAccessInterface deckAccess;
     private final PlayerSplitOutputBoundary presenter;
 
-    public PlayerSplitInteractor(BlackjackGame game, PlayerSplitDataAccessInterface deckAccess,
+    public PlayerSplitInteractor(PlayerSplitDataAccessInterface deckAccess,
                                  PlayerSplitOutputBoundary presenter) {
-        this.game = game;
         this.deckAccess = deckAccess;
         this.presenter = presenter;
     }
 
     @Override
     public void execute(PlayerSplitInputData inputData) {
-        BlackjackGame game = inputData.getGame();
-        BlackjackPlayer player = game.getPlayer();
+        BlackjackGame currentGame = inputData.getGame();
+        BlackjackPlayer player = currentGame.getPlayer();
 
-        if (game.isSplitted()) {
+        if (currentGame.isSplitted()) {
             presenter.presentFailView("You have already split this hand.");
             return;
         }
@@ -47,18 +45,17 @@ public class PlayerSplitInteractor implements PlayerSplitInputBoundary {
         secondHand.addCard(cardToMove);
 
         try {
-            firstHand.addCard(deckAccess.drawCard(game.getDeckID()));
-            secondHand.addCard(deckAccess.drawCard(game.getDeckID()));
-        }
-        catch (IOException e) {
+            firstHand.addCard(deckAccess.drawCard(currentGame.getDeckID()));
+            secondHand.addCard(deckAccess.drawCard(currentGame.getDeckID()));
+        } catch (IOException e) {
             presenter.presentFailView("Problem drawing cards for split.");
             return;
         }
 
         player.addHand(secondHand);
-        game.setSplitted(true);
+        currentGame.setSplitted(true);
 
-        PlayerSplitOutputData outputData = new PlayerSplitOutputData(game);
+        PlayerSplitOutputData outputData = new PlayerSplitOutputData(currentGame);
         presenter.present(outputData);
     }
 }
