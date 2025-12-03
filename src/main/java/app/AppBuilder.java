@@ -302,7 +302,7 @@ public class AppBuilder {
 
         PlayerSplitOutputBoundary presenter = new PlayerSplitPresenter(blackjackView);
 
-        PlayerSplitInputBoundary interactor = new PlayerSplitInteractor(blackjackGame, deckAccess, presenter);
+        PlayerSplitInputBoundary interactor = new PlayerSplitInteractor(deckAccess, presenter);
 
         PlayerSplitController controller = new PlayerSplitController(interactor);
 

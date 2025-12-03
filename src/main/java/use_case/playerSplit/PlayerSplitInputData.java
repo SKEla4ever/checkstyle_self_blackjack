@@ -9,5 +9,7 @@ public class PlayerSplitInputData {
         this.game = game;
     }
 
-    public BlackjackGame getGame() { return game; }
+    public BlackjackGame getGame() {
+        return game;
+    }
 }
